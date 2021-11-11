@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using CommandLine;
+using ConsoleMarkdownRenderer;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using Newtonsoft.Json;
 using YamlDotNet.Serialization;
@@ -43,8 +44,14 @@ namespace SqlParseTree
 
     class Program
     {
-        static void Main(string[] args) =>
-            Parser.Default.ParseArguments<Options>(args).WithParsed(Run);
+        static void Main(string[] args)
+            => new Parser()
+                .ParseArguments<Options>(args)
+                .WithParsed(Run)
+                .WithNotParsed(HandleParseError);
+
+        static private void HandleParseError(IEnumerable<Error> errs) 
+            => Displayer.DisplayMarkdown(new Uri(Path.Combine(AppContext.BaseDirectory, "README.md")));
 
         private static void Run(Options options)
         {

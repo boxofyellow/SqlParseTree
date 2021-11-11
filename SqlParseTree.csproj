@@ -7,11 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BoxOfYellow.ConsoleMarkdownRenderer" Version="0.3.0" />
     <PackageReference Include="CommandLineParser" Version="2.8.0" />
     <PackageReference Include="Microsoft.SqlServer.DACFx" Version="150.5282.3" />
     <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="README.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
