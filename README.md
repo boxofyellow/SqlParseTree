@@ -5,7 +5,7 @@ It accepts the following command line arguments
 | command line argument | description | default value |
 | - | - | - |
 | `-f`/`--format` | Controls the output format (select between `Json`, `Yaml`, `Html`, `Md`) | `Json` |
-| `-t`/`--to-file` | Write the output to a file, instead of StdOut, and the output filepath is written to StdOyt | Send output to StdOut |
+| `-t`/`--to-file` | Write the output to a file, instead of StdOut, and the output filepath is written to StdOut | Send output to StdOut |
 | `-o`/`--output-path` | The file path to use when `--to-file` has been included | `out.{format}` |
 | `-l`/`--log-destination` | Where to send log information (select between `None`, `StdOut`, `StdError`, `Output`) | `None` |
 
