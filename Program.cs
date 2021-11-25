@@ -17,6 +17,7 @@ namespace SqlParseTree
         Json,
         Yaml,
         Html,
+        Md,
     }
 
     public enum LogDestination
@@ -94,6 +95,7 @@ namespace SqlParseTree
                 Format.Json => parseData.ToJson(),
                 Format.Yaml => parseData.ToYaml(),
                 Format.Html => HtmlFormatter.Format(parseData, log),
+                Format.Md => MarkdownFormatter.Format(parseData, log),
                 _ => throw new NotImplementedException($"Unknown format {options.Format}"),
             };
 
@@ -110,7 +112,16 @@ namespace SqlParseTree
             }
             else
             {
-                Console.WriteLine(output);
+                if (options.Format == Format.Md)
+                {
+                    watch.Restart();
+                    Displayer.DisplayMarkdown(output, new Uri(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar));
+                    log.AppendLine($"Display Markdown took: {watch.Elapsed}");
+                }
+                else
+                {
+                    Console.WriteLine(output);
+                }
 
                 if (options.LogDestination == LogDestination.Output)
                 {

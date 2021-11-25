@@ -6,6 +6,7 @@
 out.html
 out.json
 out.yaml
+out.md
 
 # User-specific files
 *.rsuser

@@ -4,7 +4,7 @@ It accepts the following command line arguments
 
 | command line argument | description | default value |
 | - | - | - |
-| `-f`/`--format` | Controls the output format (select between `Json`, `Yaml`, `Html`) | `Json` |
+| `-f`/`--format` | Controls the output format (select between `Json`, `Yaml`, `Html`, `Md`) | `Json` |
 | `-t`/`--to-file` | Write the output to a file, instead of StdOut, and the output filepath is written to StdOyt | Send output to StdOut |
 | `-o`/`--output-path` | The file path to use when `--to-file` has been included | `out.{format}` |
 | `-l`/`--log-destination` | Where to send log information (select between `None`, `StdOut`, `StdError`, `Output`) | `None` |
@@ -96,3 +96,18 @@ It accepts the following command line arguments
          - Name: UniqueRowFilter
            Value: NotSpecified
    ```
+1. `echo "SELECT * FROM tbl_Foo" | dotnet run -- --format Md --to-file` yield a file with this content
+   > 1. **TSqlScript**: `SELECT * FROM tbl_Fo`...
+   >    1. **TSqlBatch**: `SELECT * FROM tbl_Fo`...
+   >       1. **SelectStatement**: `SELECT * FROM tbl_Fo`...
+   >          1. **QuerySpecification**: `SELECT * FROM tbl_Fo`...
+   >             - UniqueRowFilter: _NotSpecified_
+   >             1. **SelectStarExpression**: `*`
+   >             1. **FromClause**: `FROM tbl_Foo`
+   >                1. **NamedTableReference**: `tbl_Foo`
+   >                   - ForPath: _False_
+   >                   1. **SchemaObjectName**: `tbl_Foo`
+   >                      - Count: _1_
+   >                      1. **Identifier**: `tbl_Foo`
+   >                         - QuoteType: _NotQuoted_
+   >                         - Value: _tbl_Foo_
