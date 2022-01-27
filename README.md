@@ -1,4 +1,4 @@
-This application will parse the provided SQL and render it as requested.  The SQL content is expected to be piped application
+This application will parse the provided SQL and render it as requested.  The SQL content is expected to be piped to the application
 
 It accepts the following command line arguments
 
