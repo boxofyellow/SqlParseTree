@@ -51,8 +51,12 @@ namespace SqlParseTree
                 .WithParsed(Run)
                 .WithNotParsed(HandleParseError);
 
-        static private void HandleParseError(IEnumerable<Error> errs) 
-            => Displayer.DisplayMarkdown(new Uri(Path.Combine(AppContext.BaseDirectory, "README.md")));
+        static private void HandleParseError(IEnumerable<Error> errs)
+        {
+            Displayer.DisplayMarkdown(new Uri(Path.Combine(AppContext.BaseDirectory, "README.md")));
+            Console.WriteLine("Errors:");
+            Console.WriteLine(errs.ToYaml());
+        }
 
         private static void Run(Options options)
         {
