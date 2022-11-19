@@ -69,7 +69,7 @@ namespace SqlParseTree
                 return;
             }
 
-            // TODO: we should find some way to all picking the version of the parser
+            // TODO: we should find some way to allow picking the version of the parser
             TSqlParser parser = new TSql150Parser(initialQuotedIdentifiers: true);
 
             TSqlFragment fragment;

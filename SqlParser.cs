@@ -163,11 +163,13 @@ namespace SqlParseTree
             var isAny = typeof(It).GetMethods(BindingFlags.Static | BindingFlags.Public).Single(x => x.Name == nameof(It.IsAny));
             var addCallBack = typeof(SqlParser).GetMethods(BindingFlags.Instance | BindingFlags.NonPublic).Single(x => x.Name == nameof(AddCallback));
 
+            // The following is equivalent to (TSqlFragmentVisitor x)
+            var parameter = Expression.Parameter(typeof(TSqlFragmentVisitor), "x");
+
             foreach (var method in typeof(TSqlFragmentVisitor).GetMethods().Where(x => x.Name == nameof(TSqlFragmentVisitor.ExplicitVisit) && x.GetParameters().Length == 1))
             {
                 var parameterType = method.GetParameters().Single().ParameterType;
 
-                var parameter = Expression.Parameter(typeof(TSqlFragmentVisitor), "x");
                 // The following is equivalent to x => x.ExplicitVisit(It.IsAny<{parameterType}>())
                 var explicitVisitCall = Expression.Call(parameter, method, Expression.Call(instance: default, isAny.MakeGenericMethod(parameterType)));
                 var setupLambda = Expression.Lambda(delegateType: typeof(Action<TSqlFragmentVisitor>), explicitVisitCall, parameter);
@@ -194,7 +196,7 @@ namespace SqlParseTree
             }
             m_stack.Push(parseData);
 
-            // Now call the base class's implentation
+            // Now call the base class's implantation
             var ftnPtr = method.MethodHandle.GetFunctionPointer();
             var action = (Action<T>)Activator.CreateInstance(typeof(Action<T>), Object, ftnPtr)!;
             action(node);
