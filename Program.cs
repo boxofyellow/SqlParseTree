@@ -53,7 +53,7 @@ namespace SqlParseTree
 
         static private void HandleParseError(IEnumerable<Error> errs)
         {
-            Displayer.DisplayMarkdown(new Uri(Path.Combine(AppContext.BaseDirectory, "README.md")));
+            Displayer.DisplayMarkdownAsync(new Uri(Path.Combine(AppContext.BaseDirectory, "README.md"))).GetAwaiter().GetResult();
             Console.WriteLine("Errors:");
             Console.WriteLine(errs.ToYaml());
         }
@@ -119,7 +119,7 @@ namespace SqlParseTree
                 if (options.Format == Format.Md)
                 {
                     watch.Restart();
-                    Displayer.DisplayMarkdown(output, new Uri(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar));
+                    Displayer.DisplayMarkdownAsync(output, new Uri(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar)).GetAwaiter().GetResult();
                     log.AppendLine($"Display Markdown took: {watch.Elapsed}");
                 }
                 else
