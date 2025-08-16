@@ -1,0 +1,2204 @@
+
+<!DOCTYPE html>
+<html>
+<HEAD>
+    <TITLE>SQL</TITLE>
+    <style>
+        *.detailText
+        {
+            width: calc(100% - 50px);
+        }
+        *.hide
+        {
+            display: none;
+        }
+        *.highlight
+        {
+            background: yellow;
+        }
+        *.canHide 
+        {
+        }
+    </style>
+    <script>
+    var types = Array(164);
+    var texts = Array(164);
+
+    function toggleChildren(unique) {
+        document.getElementById('chd_' + unique).classList.toggle('hide');
+    };
+    function toggleDetail(unique) {
+        document.getElementById('dtl_' + unique).classList.toggle('hide');
+    };
+    function collapseEpandAll(forCollapse) {
+        var elements = document.getElementsByClassName('canHide');
+        for (var i = 0; i < elements.length; i++) {
+            if (forCollapse) {
+                elements[i].classList.add('hide');
+            } else {
+                elements[i].classList.remove('hide');
+            }
+        }
+    };
+    function hightlight(prefix, unique) {
+        var id = prefix + '_' + unique;
+        var element = document.getElementById(id);
+        element.classList.add('highlight');
+
+        while (element !== null) {
+            if (element.classList.contains('canHide')) {
+                element.classList.remove('hide');
+            }
+            element = element.parentElement;
+        }
+    };
+    function doSearch() {
+        var elements = document.getElementsByClassName('highlight');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].classList.remove('highlight');
+        }
+        var text = document.getElementById('txt_search').value;
+        if (text) {
+            text = text.toLowerCase();
+            for (var i = 0; i < 164; i++) {
+                if (types[i].startsWith(text)) {
+                    hightlight('type', i);
+                }
+                if (texts[i].toLowerCase().startsWith(text)) {
+                    hightlight('text', i);
+                }
+            }
+        }
+    };
+texts[0]="DECLARE @x INT\nSET @x = 1\nSELECT * FROM tbl_foo\n\nIF @x = 1\nBEGIN\n    SELECT * FROM tbl_bar\n    IF @x = 2\n    BEGIN\n        SELECT * FROM tbl_qux\n        IF @x = 4\n        BEGIN\n            SELECT * FROM tbl_garply\n            IF @x = 5\n            BEGIN\n                SELECT * FROM tbl_fred\n                IF @x = 6\n                BEGIN\n                    SELECT * FROM tbl_xyzzy\n                END\n                ELSE\n                BEGIN\n                    SELECT * FROM tbl_thud\n                END\n            END\n            ELSE\n            BEGIN\n                SELECT * FROM tbl_plugh\n            END\n        END\n        ELSE\n        BEGIN\n            SELECT * FROM tbl_waldo\n        END\n    END\n    ELSE\n    BEGIN\n        SELECT * FROM tbl_quux\n    END\nEND\nELSE\nBEGIN\n    SELECT * FROM tbl_baz\n    IF @x = 3\n    BEGIN\n        SELECT * FROM tbl_corge\n    END\n    ELSE\n    BEGIN\n        SELECT * FROM tbl_grault\n    END\nEND\n\nEXECUTE sp_executesql N\u0027SELECT * FROM tbl_foo WHERE id = @id\u0027, N\u0027@id INT\u0027, @id = 1\n";
+types[0]='tsqlscript';
+texts[1]="DECLARE @x INT\nSET @x = 1\nSELECT * FROM tbl_foo\n\nIF @x = 1\nBEGIN\n    SELECT * FROM tbl_bar\n    IF @x = 2\n    BEGIN\n        SELECT * FROM tbl_qux\n        IF @x = 4\n        BEGIN\n            SELECT * FROM tbl_garply\n            IF @x = 5\n            BEGIN\n                SELECT * FROM tbl_fred\n                IF @x = 6\n                BEGIN\n                    SELECT * FROM tbl_xyzzy\n                END\n                ELSE\n                BEGIN\n                    SELECT * FROM tbl_thud\n                END\n            END\n            ELSE\n            BEGIN\n                SELECT * FROM tbl_plugh\n            END\n        END\n        ELSE\n        BEGIN\n            SELECT * FROM tbl_waldo\n        END\n    END\n    ELSE\n    BEGIN\n        SELECT * FROM tbl_quux\n    END\nEND\nELSE\nBEGIN\n    SELECT * FROM tbl_baz\n    IF @x = 3\n    BEGIN\n        SELECT * FROM tbl_corge\n    END\n    ELSE\n    BEGIN\n        SELECT * FROM tbl_grault\n    END\nEND\n\nEXECUTE sp_executesql N\u0027SELECT * FROM tbl_foo WHERE id = @id\u0027, N\u0027@id INT\u0027, @id = 1";
+types[1]='tsqlbatch';
+texts[2]="DECLARE @x INT";
+types[2]='declarevariablestatement';
+texts[3]="@x INT";
+types[3]='declarevariableelement';
+texts[4]="@x";
+types[4]='identifier';
+texts[5]="INT";
+types[5]='sqldatatypereference';
+texts[6]="INT";
+types[6]='schemaobjectname';
+texts[7]="INT";
+types[7]='identifier';
+texts[8]="SET @x = 1";
+types[8]='setvariablestatement';
+texts[9]="@x";
+types[9]='variablereference';
+texts[10]="1";
+types[10]='integerliteral';
+texts[11]="SELECT * FROM tbl_foo";
+types[11]='selectstatement';
+texts[12]="SELECT * FROM tbl_foo";
+types[12]='queryspecification';
+texts[13]="*";
+types[13]='selectstarexpression';
+texts[14]="FROM tbl_foo";
+types[14]='fromclause';
+texts[15]="tbl_foo";
+types[15]='namedtablereference';
+texts[16]="tbl_foo";
+types[16]='schemaobjectname';
+texts[17]="tbl_foo";
+types[17]='identifier';
+texts[18]="IF @x = 1\nBEGIN\n    SELECT * FROM tbl_bar\n    IF @x = 2\n    BEGIN\n        SELECT * FROM tbl_qux\n        IF @x = 4\n        BEGIN\n            SELECT * FROM tbl_garply\n            IF @x = 5\n            BEGIN\n                SELECT * FROM tbl_fred\n                IF @x = 6\n                BEGIN\n                    SELECT * FROM tbl_xyzzy\n                END\n                ELSE\n                BEGIN\n                    SELECT * FROM tbl_thud\n                END\n            END\n            ELSE\n            BEGIN\n                SELECT * FROM tbl_plugh\n            END\n        END\n        ELSE\n        BEGIN\n            SELECT * FROM tbl_waldo\n        END\n    END\n    ELSE\n    BEGIN\n        SELECT * FROM tbl_quux\n    END\nEND\nELSE\nBEGIN\n    SELECT * FROM tbl_baz\n    IF @x = 3\n    BEGIN\n        SELECT * FROM tbl_corge\n    END\n    ELSE\n    BEGIN\n        SELECT * FROM tbl_grault\n    END\nEND";
+types[18]='ifstatement';
+texts[19]="@x = 1";
+types[19]='booleancomparisonexpression';
+texts[20]="@x";
+types[20]='variablereference';
+texts[21]="1";
+types[21]='integerliteral';
+texts[22]="BEGIN\n    SELECT * FROM tbl_bar\n    IF @x = 2\n    BEGIN\n        SELECT * FROM tbl_qux\n        IF @x = 4\n        BEGIN\n            SELECT * FROM tbl_garply\n            IF @x = 5\n            BEGIN\n                SELECT * FROM tbl_fred\n                IF @x = 6\n                BEGIN\n                    SELECT * FROM tbl_xyzzy\n                END\n                ELSE\n                BEGIN\n                    SELECT * FROM tbl_thud\n                END\n            END\n            ELSE\n            BEGIN\n                SELECT * FROM tbl_plugh\n            END\n        END\n        ELSE\n        BEGIN\n            SELECT * FROM tbl_waldo\n        END\n    END\n    ELSE\n    BEGIN\n        SELECT * FROM tbl_quux\n    END\nEND";
+types[22]='beginendblockstatement';
+texts[23]="";
+types[23]='statementlist';
+texts[24]="SELECT * FROM tbl_bar";
+types[24]='selectstatement';
+texts[25]="SELECT * FROM tbl_bar";
+types[25]='queryspecification';
+texts[26]="*";
+types[26]='selectstarexpression';
+texts[27]="FROM tbl_bar";
+types[27]='fromclause';
+texts[28]="tbl_bar";
+types[28]='namedtablereference';
+texts[29]="tbl_bar";
+types[29]='schemaobjectname';
+texts[30]="tbl_bar";
+types[30]='identifier';
+texts[31]="IF @x = 2\n    BEGIN\n        SELECT * FROM tbl_qux\n        IF @x = 4\n        BEGIN\n            SELECT * FROM tbl_garply\n            IF @x = 5\n            BEGIN\n                SELECT * FROM tbl_fred\n                IF @x = 6\n                BEGIN\n                    SELECT * FROM tbl_xyzzy\n                END\n                ELSE\n                BEGIN\n                    SELECT * FROM tbl_thud\n                END\n            END\n            ELSE\n            BEGIN\n                SELECT * FROM tbl_plugh\n            END\n        END\n        ELSE\n        BEGIN\n            SELECT * FROM tbl_waldo\n        END\n    END\n    ELSE\n    BEGIN\n        SELECT * FROM tbl_quux\n    END";
+types[31]='ifstatement';
+texts[32]="@x = 2";
+types[32]='booleancomparisonexpression';
+texts[33]="@x";
+types[33]='variablereference';
+texts[34]="2";
+types[34]='integerliteral';
+texts[35]="BEGIN\n        SELECT * FROM tbl_qux\n        IF @x = 4\n        BEGIN\n            SELECT * FROM tbl_garply\n            IF @x = 5\n            BEGIN\n                SELECT * FROM tbl_fred\n                IF @x = 6\n                BEGIN\n                    SELECT * FROM tbl_xyzzy\n                END\n                ELSE\n                BEGIN\n                    SELECT * FROM tbl_thud\n                END\n            END\n            ELSE\n            BEGIN\n                SELECT * FROM tbl_plugh\n            END\n        END\n        ELSE\n        BEGIN\n            SELECT * FROM tbl_waldo\n        END\n    END";
+types[35]='beginendblockstatement';
+texts[36]="";
+types[36]='statementlist';
+texts[37]="SELECT * FROM tbl_qux";
+types[37]='selectstatement';
+texts[38]="SELECT * FROM tbl_qux";
+types[38]='queryspecification';
+texts[39]="*";
+types[39]='selectstarexpression';
+texts[40]="FROM tbl_qux";
+types[40]='fromclause';
+texts[41]="tbl_qux";
+types[41]='namedtablereference';
+texts[42]="tbl_qux";
+types[42]='schemaobjectname';
+texts[43]="tbl_qux";
+types[43]='identifier';
+texts[44]="IF @x = 4\n        BEGIN\n            SELECT * FROM tbl_garply\n            IF @x = 5\n            BEGIN\n                SELECT * FROM tbl_fred\n                IF @x = 6\n                BEGIN\n                    SELECT * FROM tbl_xyzzy\n                END\n                ELSE\n                BEGIN\n                    SELECT * FROM tbl_thud\n                END\n            END\n            ELSE\n            BEGIN\n                SELECT * FROM tbl_plugh\n            END\n        END\n        ELSE\n        BEGIN\n            SELECT * FROM tbl_waldo\n        END";
+types[44]='ifstatement';
+texts[45]="@x = 4";
+types[45]='booleancomparisonexpression';
+texts[46]="@x";
+types[46]='variablereference';
+texts[47]="4";
+types[47]='integerliteral';
+texts[48]="BEGIN\n            SELECT * FROM tbl_garply\n            IF @x = 5\n            BEGIN\n                SELECT * FROM tbl_fred\n                IF @x = 6\n                BEGIN\n                    SELECT * FROM tbl_xyzzy\n                END\n                ELSE\n                BEGIN\n                    SELECT * FROM tbl_thud\n                END\n            END\n            ELSE\n            BEGIN\n                SELECT * FROM tbl_plugh\n            END\n        END";
+types[48]='beginendblockstatement';
+texts[49]="";
+types[49]='statementlist';
+texts[50]="SELECT * FROM tbl_garply";
+types[50]='selectstatement';
+texts[51]="SELECT * FROM tbl_garply";
+types[51]='queryspecification';
+texts[52]="*";
+types[52]='selectstarexpression';
+texts[53]="FROM tbl_garply";
+types[53]='fromclause';
+texts[54]="tbl_garply";
+types[54]='namedtablereference';
+texts[55]="tbl_garply";
+types[55]='schemaobjectname';
+texts[56]="tbl_garply";
+types[56]='identifier';
+texts[57]="IF @x = 5\n            BEGIN\n                SELECT * FROM tbl_fred\n                IF @x = 6\n                BEGIN\n                    SELECT * FROM tbl_xyzzy\n                END\n                ELSE\n                BEGIN\n                    SELECT * FROM tbl_thud\n                END\n            END\n            ELSE\n            BEGIN\n                SELECT * FROM tbl_plugh\n            END";
+types[57]='ifstatement';
+texts[58]="@x = 5";
+types[58]='booleancomparisonexpression';
+texts[59]="@x";
+types[59]='variablereference';
+texts[60]="5";
+types[60]='integerliteral';
+texts[61]="BEGIN\n                SELECT * FROM tbl_fred\n                IF @x = 6\n                BEGIN\n                    SELECT * FROM tbl_xyzzy\n                END\n                ELSE\n                BEGIN\n                    SELECT * FROM tbl_thud\n                END\n            END";
+types[61]='beginendblockstatement';
+texts[62]="";
+types[62]='statementlist';
+texts[63]="SELECT * FROM tbl_fred";
+types[63]='selectstatement';
+texts[64]="SELECT * FROM tbl_fred";
+types[64]='queryspecification';
+texts[65]="*";
+types[65]='selectstarexpression';
+texts[66]="FROM tbl_fred";
+types[66]='fromclause';
+texts[67]="tbl_fred";
+types[67]='namedtablereference';
+texts[68]="tbl_fred";
+types[68]='schemaobjectname';
+texts[69]="tbl_fred";
+types[69]='identifier';
+texts[70]="IF @x = 6\n                BEGIN\n                    SELECT * FROM tbl_xyzzy\n                END\n                ELSE\n                BEGIN\n                    SELECT * FROM tbl_thud\n                END";
+types[70]='ifstatement';
+texts[71]="@x = 6";
+types[71]='booleancomparisonexpression';
+texts[72]="@x";
+types[72]='variablereference';
+texts[73]="6";
+types[73]='integerliteral';
+texts[74]="BEGIN\n                    SELECT * FROM tbl_xyzzy\n                END";
+types[74]='beginendblockstatement';
+texts[75]="";
+types[75]='statementlist';
+texts[76]="SELECT * FROM tbl_xyzzy";
+types[76]='selectstatement';
+texts[77]="SELECT * FROM tbl_xyzzy";
+types[77]='queryspecification';
+texts[78]="*";
+types[78]='selectstarexpression';
+texts[79]="FROM tbl_xyzzy";
+types[79]='fromclause';
+texts[80]="tbl_xyzzy";
+types[80]='namedtablereference';
+texts[81]="tbl_xyzzy";
+types[81]='schemaobjectname';
+texts[82]="tbl_xyzzy";
+types[82]='identifier';
+texts[83]="BEGIN\n                    SELECT * FROM tbl_thud\n                END";
+types[83]='beginendblockstatement';
+texts[84]="";
+types[84]='statementlist';
+texts[85]="SELECT * FROM tbl_thud";
+types[85]='selectstatement';
+texts[86]="SELECT * FROM tbl_thud";
+types[86]='queryspecification';
+texts[87]="*";
+types[87]='selectstarexpression';
+texts[88]="FROM tbl_thud";
+types[88]='fromclause';
+texts[89]="tbl_thud";
+types[89]='namedtablereference';
+texts[90]="tbl_thud";
+types[90]='schemaobjectname';
+texts[91]="tbl_thud";
+types[91]='identifier';
+texts[92]="BEGIN\n                SELECT * FROM tbl_plugh\n            END";
+types[92]='beginendblockstatement';
+texts[93]="";
+types[93]='statementlist';
+texts[94]="SELECT * FROM tbl_plugh";
+types[94]='selectstatement';
+texts[95]="SELECT * FROM tbl_plugh";
+types[95]='queryspecification';
+texts[96]="*";
+types[96]='selectstarexpression';
+texts[97]="FROM tbl_plugh";
+types[97]='fromclause';
+texts[98]="tbl_plugh";
+types[98]='namedtablereference';
+texts[99]="tbl_plugh";
+types[99]='schemaobjectname';
+texts[100]="tbl_plugh";
+types[100]='identifier';
+texts[101]="BEGIN\n            SELECT * FROM tbl_waldo\n        END";
+types[101]='beginendblockstatement';
+texts[102]="";
+types[102]='statementlist';
+texts[103]="SELECT * FROM tbl_waldo";
+types[103]='selectstatement';
+texts[104]="SELECT * FROM tbl_waldo";
+types[104]='queryspecification';
+texts[105]="*";
+types[105]='selectstarexpression';
+texts[106]="FROM tbl_waldo";
+types[106]='fromclause';
+texts[107]="tbl_waldo";
+types[107]='namedtablereference';
+texts[108]="tbl_waldo";
+types[108]='schemaobjectname';
+texts[109]="tbl_waldo";
+types[109]='identifier';
+texts[110]="BEGIN\n        SELECT * FROM tbl_quux\n    END";
+types[110]='beginendblockstatement';
+texts[111]="";
+types[111]='statementlist';
+texts[112]="SELECT * FROM tbl_quux";
+types[112]='selectstatement';
+texts[113]="SELECT * FROM tbl_quux";
+types[113]='queryspecification';
+texts[114]="*";
+types[114]='selectstarexpression';
+texts[115]="FROM tbl_quux";
+types[115]='fromclause';
+texts[116]="tbl_quux";
+types[116]='namedtablereference';
+texts[117]="tbl_quux";
+types[117]='schemaobjectname';
+texts[118]="tbl_quux";
+types[118]='identifier';
+texts[119]="BEGIN\n    SELECT * FROM tbl_baz\n    IF @x = 3\n    BEGIN\n        SELECT * FROM tbl_corge\n    END\n    ELSE\n    BEGIN\n        SELECT * FROM tbl_grault\n    END\nEND";
+types[119]='beginendblockstatement';
+texts[120]="";
+types[120]='statementlist';
+texts[121]="SELECT * FROM tbl_baz";
+types[121]='selectstatement';
+texts[122]="SELECT * FROM tbl_baz";
+types[122]='queryspecification';
+texts[123]="*";
+types[123]='selectstarexpression';
+texts[124]="FROM tbl_baz";
+types[124]='fromclause';
+texts[125]="tbl_baz";
+types[125]='namedtablereference';
+texts[126]="tbl_baz";
+types[126]='schemaobjectname';
+texts[127]="tbl_baz";
+types[127]='identifier';
+texts[128]="IF @x = 3\n    BEGIN\n        SELECT * FROM tbl_corge\n    END\n    ELSE\n    BEGIN\n        SELECT * FROM tbl_grault\n    END";
+types[128]='ifstatement';
+texts[129]="@x = 3";
+types[129]='booleancomparisonexpression';
+texts[130]="@x";
+types[130]='variablereference';
+texts[131]="3";
+types[131]='integerliteral';
+texts[132]="BEGIN\n        SELECT * FROM tbl_corge\n    END";
+types[132]='beginendblockstatement';
+texts[133]="";
+types[133]='statementlist';
+texts[134]="SELECT * FROM tbl_corge";
+types[134]='selectstatement';
+texts[135]="SELECT * FROM tbl_corge";
+types[135]='queryspecification';
+texts[136]="*";
+types[136]='selectstarexpression';
+texts[137]="FROM tbl_corge";
+types[137]='fromclause';
+texts[138]="tbl_corge";
+types[138]='namedtablereference';
+texts[139]="tbl_corge";
+types[139]='schemaobjectname';
+texts[140]="tbl_corge";
+types[140]='identifier';
+texts[141]="BEGIN\n        SELECT * FROM tbl_grault\n    END";
+types[141]='beginendblockstatement';
+texts[142]="";
+types[142]='statementlist';
+texts[143]="SELECT * FROM tbl_grault";
+types[143]='selectstatement';
+texts[144]="SELECT * FROM tbl_grault";
+types[144]='queryspecification';
+texts[145]="*";
+types[145]='selectstarexpression';
+texts[146]="FROM tbl_grault";
+types[146]='fromclause';
+texts[147]="tbl_grault";
+types[147]='namedtablereference';
+texts[148]="tbl_grault";
+types[148]='schemaobjectname';
+texts[149]="tbl_grault";
+types[149]='identifier';
+texts[150]="EXECUTE sp_executesql N\u0027SELECT * FROM tbl_foo WHERE id = @id\u0027, N\u0027@id INT\u0027, @id = 1";
+types[150]='executestatement';
+texts[151]="EXECUTE sp_executesql N\u0027SELECT * FROM tbl_foo WHERE id = @id\u0027, N\u0027@id INT\u0027, @id = 1";
+types[151]='executespecification';
+texts[152]="sp_executesql N\u0027SELECT * FROM tbl_foo WHERE id = @id\u0027, N\u0027@id INT\u0027, @id = 1";
+types[152]='executableprocedurereference';
+texts[153]="N\u0027SELECT * FROM tbl_foo WHERE id = @id\u0027";
+types[153]='executeparameter';
+texts[154]="N\u0027SELECT * FROM tbl_foo WHERE id = @id\u0027";
+types[154]='stringliteral';
+texts[155]="N\u0027@id INT\u0027";
+types[155]='executeparameter';
+texts[156]="N\u0027@id INT\u0027";
+types[156]='stringliteral';
+texts[157]="@id = 1";
+types[157]='executeparameter';
+texts[158]="@id";
+types[158]='variablereference';
+texts[159]="1";
+types[159]='integerliteral';
+texts[160]="sp_executesql";
+types[160]='procedurereferencename';
+texts[161]="sp_executesql";
+types[161]='procedurereference';
+texts[162]="sp_executesql";
+types[162]='schemaobjectname';
+texts[163]="sp_executesql";
+types[163]='identifier';
+
+    </script>
+</HEAD>
+<BODY>
+<input type='button' value='Collapse All' onClick='collapseEpandAll(true);' />
+<input type='button' value='Expand All' onClick='collapseEpandAll(false);' />
+<br />
+<input type='type' id='txt_search' onKeyUp='doSearch();' />
+<ol>
+<li>
+<span onClick = 'toggleChildren(0);'> +/- </span>
+<b id='type_0'>TSqlScript</b>:
+<span id='text_0'>DECLARE @x INT</span>
+ <span onClick = 'toggleDetail(0);'>...</span>
+<div id='dtl_0' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_0' rows='5' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_0').value=texts[0];
+</script>
+</div>
+<ol id='chd_0' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(1);'> +/- </span>
+<b id='type_1'>TSqlBatch</b>:
+<span id='text_1'>DECLARE @x INT</span>
+ <span onClick = 'toggleDetail(1);'>...</span>
+<div id='dtl_1' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_1' rows='5' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_1').value=texts[1];
+</script>
+</div>
+<ol id='chd_1' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(2);'> +/- </span>
+<b id='type_2'>DeclareVariableStatement</b>:
+<span id='text_2'>DECLARE @x INT</span>
+<ol id='chd_2' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(3);'> +/- </span>
+<b id='type_3'>DeclareVariableElement</b>:
+<span id='text_3'>@x INT</span>
+<ol id='chd_3' class='hide canHide'>
+<li>
+<b id='type_4'>Identifier</b>:
+<span id='text_4'>@x</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+@x
+</li>
+</ul>
+</li>
+<li>
+<span onClick = 'toggleChildren(5);'> +/- </span>
+<b id='type_5'>SqlDataTypeReference</b>:
+<span id='text_5'>INT</span>
+<ul>
+<li>
+SqlDataTypeOption:
+Int
+</li>
+</ul>
+<ol id='chd_5' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(6);'> +/- </span>
+<b id='type_6'>SchemaObjectName</b>:
+<span id='text_6'>INT</span>
+<ul>
+<li>
+Count:
+1
+</li>
+</ul>
+<ol id='chd_6' class='hide canHide'>
+<li>
+<b id='type_7'>Identifier</b>:
+<span id='text_7'>INT</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+INT
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(8);'> +/- </span>
+<b id='type_8'>SetVariableStatement</b>:
+<span id='text_8'>SET @x = 1</span>
+<ul>
+<li>
+AssignmentKind:
+Equals
+</li>
+<li>
+FunctionCallExists:
+False
+</li>
+<li>
+SeparatorType:
+NotSpecified
+</li>
+</ul>
+<ol id='chd_8' class='hide canHide'>
+<li>
+<b id='type_9'>VariableReference</b>:
+<span id='text_9'>@x</span>
+<ul>
+<li>
+Name:
+@x
+</li>
+</ul>
+</li>
+<li>
+<b id='type_10'>IntegerLiteral</b>:
+<span id='text_10'>1</span>
+<ul>
+<li>
+LiteralType:
+Integer
+</li>
+<li>
+Value:
+1
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(11);'> +/- </span>
+<b id='type_11'>SelectStatement</b>:
+<span id='text_11'>SELECT * FROM tbl_foo</span>
+<ol id='chd_11' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(12);'> +/- </span>
+<b id='type_12'>QuerySpecification</b>:
+<span id='text_12'>SELECT * FROM tbl_foo</span>
+<ul>
+<li>
+UniqueRowFilter:
+NotSpecified
+</li>
+</ul>
+<ol id='chd_12' class='hide canHide'>
+<li>
+<b id='type_13'>SelectStarExpression</b>:
+<span id='text_13'>*</span>
+</li>
+<li>
+<span onClick = 'toggleChildren(14);'> +/- </span>
+<b id='type_14'>FromClause</b>:
+<span id='text_14'>FROM tbl_foo</span>
+<ol id='chd_14' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(15);'> +/- </span>
+<b id='type_15'>NamedTableReference</b>:
+<span id='text_15'>tbl_foo</span>
+<ul>
+<li>
+ForPath:
+False
+</li>
+</ul>
+<ol id='chd_15' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(16);'> +/- </span>
+<b id='type_16'>SchemaObjectName</b>:
+<span id='text_16'>tbl_foo</span>
+<ul>
+<li>
+Count:
+1
+</li>
+</ul>
+<ol id='chd_16' class='hide canHide'>
+<li>
+<b id='type_17'>Identifier</b>:
+<span id='text_17'>tbl_foo</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+tbl_foo
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(18);'> +/- </span>
+<b id='type_18'>IfStatement</b>:
+<span id='text_18'>IF @x = 1</span>
+ <span onClick = 'toggleDetail(18);'>...</span>
+<div id='dtl_18' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_18' rows='5' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_18').value=texts[18];
+</script>
+</div>
+<ol id='chd_18' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(19);'> +/- </span>
+<b id='type_19'>BooleanComparisonExpression</b>:
+<span id='text_19'>@x = 1</span>
+<ul>
+<li>
+ComparisonType:
+Equals
+</li>
+</ul>
+<ol id='chd_19' class='hide canHide'>
+<li>
+<b id='type_20'>VariableReference</b>:
+<span id='text_20'>@x</span>
+<ul>
+<li>
+Name:
+@x
+</li>
+</ul>
+</li>
+<li>
+<b id='type_21'>IntegerLiteral</b>:
+<span id='text_21'>1</span>
+<ul>
+<li>
+LiteralType:
+Integer
+</li>
+<li>
+Value:
+1
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(22);'> +/- </span>
+<b id='type_22'>BeginEndBlockStatement</b>:
+<span id='text_22'>BEGIN</span>
+ <span onClick = 'toggleDetail(22);'>...</span>
+<div id='dtl_22' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_22' rows='5' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_22').value=texts[22];
+</script>
+</div>
+<ol id='chd_22' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(23);'> +/- </span>
+<b id='type_23'>StatementList</b>:
+<span id='text_23'></span>
+<ol id='chd_23' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(24);'> +/- </span>
+<b id='type_24'>SelectStatement</b>:
+<span id='text_24'>SELECT * FROM tbl_bar</span>
+<ol id='chd_24' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(25);'> +/- </span>
+<b id='type_25'>QuerySpecification</b>:
+<span id='text_25'>SELECT * FROM tbl_bar</span>
+<ul>
+<li>
+UniqueRowFilter:
+NotSpecified
+</li>
+</ul>
+<ol id='chd_25' class='hide canHide'>
+<li>
+<b id='type_26'>SelectStarExpression</b>:
+<span id='text_26'>*</span>
+</li>
+<li>
+<span onClick = 'toggleChildren(27);'> +/- </span>
+<b id='type_27'>FromClause</b>:
+<span id='text_27'>FROM tbl_bar</span>
+<ol id='chd_27' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(28);'> +/- </span>
+<b id='type_28'>NamedTableReference</b>:
+<span id='text_28'>tbl_bar</span>
+<ul>
+<li>
+ForPath:
+False
+</li>
+</ul>
+<ol id='chd_28' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(29);'> +/- </span>
+<b id='type_29'>SchemaObjectName</b>:
+<span id='text_29'>tbl_bar</span>
+<ul>
+<li>
+Count:
+1
+</li>
+</ul>
+<ol id='chd_29' class='hide canHide'>
+<li>
+<b id='type_30'>Identifier</b>:
+<span id='text_30'>tbl_bar</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+tbl_bar
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(31);'> +/- </span>
+<b id='type_31'>IfStatement</b>:
+<span id='text_31'>IF @x = 2</span>
+ <span onClick = 'toggleDetail(31);'>...</span>
+<div id='dtl_31' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_31' rows='5' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_31').value=texts[31];
+</script>
+</div>
+<ol id='chd_31' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(32);'> +/- </span>
+<b id='type_32'>BooleanComparisonExpression</b>:
+<span id='text_32'>@x = 2</span>
+<ul>
+<li>
+ComparisonType:
+Equals
+</li>
+</ul>
+<ol id='chd_32' class='hide canHide'>
+<li>
+<b id='type_33'>VariableReference</b>:
+<span id='text_33'>@x</span>
+<ul>
+<li>
+Name:
+@x
+</li>
+</ul>
+</li>
+<li>
+<b id='type_34'>IntegerLiteral</b>:
+<span id='text_34'>2</span>
+<ul>
+<li>
+LiteralType:
+Integer
+</li>
+<li>
+Value:
+2
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(35);'> +/- </span>
+<b id='type_35'>BeginEndBlockStatement</b>:
+<span id='text_35'>BEGIN</span>
+ <span onClick = 'toggleDetail(35);'>...</span>
+<div id='dtl_35' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_35' rows='5' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_35').value=texts[35];
+</script>
+</div>
+<ol id='chd_35' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(36);'> +/- </span>
+<b id='type_36'>StatementList</b>:
+<span id='text_36'></span>
+<ol id='chd_36' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(37);'> +/- </span>
+<b id='type_37'>SelectStatement</b>:
+<span id='text_37'>SELECT * FROM tbl_qux</span>
+<ol id='chd_37' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(38);'> +/- </span>
+<b id='type_38'>QuerySpecification</b>:
+<span id='text_38'>SELECT * FROM tbl_qux</span>
+<ul>
+<li>
+UniqueRowFilter:
+NotSpecified
+</li>
+</ul>
+<ol id='chd_38' class='hide canHide'>
+<li>
+<b id='type_39'>SelectStarExpression</b>:
+<span id='text_39'>*</span>
+</li>
+<li>
+<span onClick = 'toggleChildren(40);'> +/- </span>
+<b id='type_40'>FromClause</b>:
+<span id='text_40'>FROM tbl_qux</span>
+<ol id='chd_40' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(41);'> +/- </span>
+<b id='type_41'>NamedTableReference</b>:
+<span id='text_41'>tbl_qux</span>
+<ul>
+<li>
+ForPath:
+False
+</li>
+</ul>
+<ol id='chd_41' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(42);'> +/- </span>
+<b id='type_42'>SchemaObjectName</b>:
+<span id='text_42'>tbl_qux</span>
+<ul>
+<li>
+Count:
+1
+</li>
+</ul>
+<ol id='chd_42' class='hide canHide'>
+<li>
+<b id='type_43'>Identifier</b>:
+<span id='text_43'>tbl_qux</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+tbl_qux
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(44);'> +/- </span>
+<b id='type_44'>IfStatement</b>:
+<span id='text_44'>IF @x = 4</span>
+ <span onClick = 'toggleDetail(44);'>...</span>
+<div id='dtl_44' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_44' rows='5' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_44').value=texts[44];
+</script>
+</div>
+<ol id='chd_44' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(45);'> +/- </span>
+<b id='type_45'>BooleanComparisonExpression</b>:
+<span id='text_45'>@x = 4</span>
+<ul>
+<li>
+ComparisonType:
+Equals
+</li>
+</ul>
+<ol id='chd_45' class='hide canHide'>
+<li>
+<b id='type_46'>VariableReference</b>:
+<span id='text_46'>@x</span>
+<ul>
+<li>
+Name:
+@x
+</li>
+</ul>
+</li>
+<li>
+<b id='type_47'>IntegerLiteral</b>:
+<span id='text_47'>4</span>
+<ul>
+<li>
+LiteralType:
+Integer
+</li>
+<li>
+Value:
+4
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(48);'> +/- </span>
+<b id='type_48'>BeginEndBlockStatement</b>:
+<span id='text_48'>BEGIN</span>
+ <span onClick = 'toggleDetail(48);'>...</span>
+<div id='dtl_48' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_48' rows='5' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_48').value=texts[48];
+</script>
+</div>
+<ol id='chd_48' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(49);'> +/- </span>
+<b id='type_49'>StatementList</b>:
+<span id='text_49'></span>
+<ol id='chd_49' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(50);'> +/- </span>
+<b id='type_50'>SelectStatement</b>:
+<span id='text_50'>SELECT * FROM tbl_garply</span>
+<ol id='chd_50' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(51);'> +/- </span>
+<b id='type_51'>QuerySpecification</b>:
+<span id='text_51'>SELECT * FROM tbl_garply</span>
+<ul>
+<li>
+UniqueRowFilter:
+NotSpecified
+</li>
+</ul>
+<ol id='chd_51' class='hide canHide'>
+<li>
+<b id='type_52'>SelectStarExpression</b>:
+<span id='text_52'>*</span>
+</li>
+<li>
+<span onClick = 'toggleChildren(53);'> +/- </span>
+<b id='type_53'>FromClause</b>:
+<span id='text_53'>FROM tbl_garply</span>
+<ol id='chd_53' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(54);'> +/- </span>
+<b id='type_54'>NamedTableReference</b>:
+<span id='text_54'>tbl_garply</span>
+<ul>
+<li>
+ForPath:
+False
+</li>
+</ul>
+<ol id='chd_54' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(55);'> +/- </span>
+<b id='type_55'>SchemaObjectName</b>:
+<span id='text_55'>tbl_garply</span>
+<ul>
+<li>
+Count:
+1
+</li>
+</ul>
+<ol id='chd_55' class='hide canHide'>
+<li>
+<b id='type_56'>Identifier</b>:
+<span id='text_56'>tbl_garply</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+tbl_garply
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(57);'> +/- </span>
+<b id='type_57'>IfStatement</b>:
+<span id='text_57'>IF @x = 5</span>
+ <span onClick = 'toggleDetail(57);'>...</span>
+<div id='dtl_57' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_57' rows='5' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_57').value=texts[57];
+</script>
+</div>
+<ol id='chd_57' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(58);'> +/- </span>
+<b id='type_58'>BooleanComparisonExpression</b>:
+<span id='text_58'>@x = 5</span>
+<ul>
+<li>
+ComparisonType:
+Equals
+</li>
+</ul>
+<ol id='chd_58' class='hide canHide'>
+<li>
+<b id='type_59'>VariableReference</b>:
+<span id='text_59'>@x</span>
+<ul>
+<li>
+Name:
+@x
+</li>
+</ul>
+</li>
+<li>
+<b id='type_60'>IntegerLiteral</b>:
+<span id='text_60'>5</span>
+<ul>
+<li>
+LiteralType:
+Integer
+</li>
+<li>
+Value:
+5
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(61);'> +/- </span>
+<b id='type_61'>BeginEndBlockStatement</b>:
+<span id='text_61'>BEGIN</span>
+ <span onClick = 'toggleDetail(61);'>...</span>
+<div id='dtl_61' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_61' rows='5' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_61').value=texts[61];
+</script>
+</div>
+<ol id='chd_61' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(62);'> +/- </span>
+<b id='type_62'>StatementList</b>:
+<span id='text_62'></span>
+<ol id='chd_62' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(63);'> +/- </span>
+<b id='type_63'>SelectStatement</b>:
+<span id='text_63'>SELECT * FROM tbl_fred</span>
+<ol id='chd_63' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(64);'> +/- </span>
+<b id='type_64'>QuerySpecification</b>:
+<span id='text_64'>SELECT * FROM tbl_fred</span>
+<ul>
+<li>
+UniqueRowFilter:
+NotSpecified
+</li>
+</ul>
+<ol id='chd_64' class='hide canHide'>
+<li>
+<b id='type_65'>SelectStarExpression</b>:
+<span id='text_65'>*</span>
+</li>
+<li>
+<span onClick = 'toggleChildren(66);'> +/- </span>
+<b id='type_66'>FromClause</b>:
+<span id='text_66'>FROM tbl_fred</span>
+<ol id='chd_66' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(67);'> +/- </span>
+<b id='type_67'>NamedTableReference</b>:
+<span id='text_67'>tbl_fred</span>
+<ul>
+<li>
+ForPath:
+False
+</li>
+</ul>
+<ol id='chd_67' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(68);'> +/- </span>
+<b id='type_68'>SchemaObjectName</b>:
+<span id='text_68'>tbl_fred</span>
+<ul>
+<li>
+Count:
+1
+</li>
+</ul>
+<ol id='chd_68' class='hide canHide'>
+<li>
+<b id='type_69'>Identifier</b>:
+<span id='text_69'>tbl_fred</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+tbl_fred
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(70);'> +/- </span>
+<b id='type_70'>IfStatement</b>:
+<span id='text_70'>IF @x = 6</span>
+ <span onClick = 'toggleDetail(70);'>...</span>
+<div id='dtl_70' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_70' rows='5' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_70').value=texts[70];
+</script>
+</div>
+<ol id='chd_70' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(71);'> +/- </span>
+<b id='type_71'>BooleanComparisonExpression</b>:
+<span id='text_71'>@x = 6</span>
+<ul>
+<li>
+ComparisonType:
+Equals
+</li>
+</ul>
+<ol id='chd_71' class='hide canHide'>
+<li>
+<b id='type_72'>VariableReference</b>:
+<span id='text_72'>@x</span>
+<ul>
+<li>
+Name:
+@x
+</li>
+</ul>
+</li>
+<li>
+<b id='type_73'>IntegerLiteral</b>:
+<span id='text_73'>6</span>
+<ul>
+<li>
+LiteralType:
+Integer
+</li>
+<li>
+Value:
+6
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(74);'> +/- </span>
+<b id='type_74'>BeginEndBlockStatement</b>:
+<span id='text_74'>BEGIN</span>
+ <span onClick = 'toggleDetail(74);'>...</span>
+<div id='dtl_74' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_74' rows='3' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_74').value=texts[74];
+</script>
+</div>
+<ol id='chd_74' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(75);'> +/- </span>
+<b id='type_75'>StatementList</b>:
+<span id='text_75'></span>
+<ol id='chd_75' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(76);'> +/- </span>
+<b id='type_76'>SelectStatement</b>:
+<span id='text_76'>SELECT * FROM tbl_xyzzy</span>
+<ol id='chd_76' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(77);'> +/- </span>
+<b id='type_77'>QuerySpecification</b>:
+<span id='text_77'>SELECT * FROM tbl_xyzzy</span>
+<ul>
+<li>
+UniqueRowFilter:
+NotSpecified
+</li>
+</ul>
+<ol id='chd_77' class='hide canHide'>
+<li>
+<b id='type_78'>SelectStarExpression</b>:
+<span id='text_78'>*</span>
+</li>
+<li>
+<span onClick = 'toggleChildren(79);'> +/- </span>
+<b id='type_79'>FromClause</b>:
+<span id='text_79'>FROM tbl_xyzzy</span>
+<ol id='chd_79' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(80);'> +/- </span>
+<b id='type_80'>NamedTableReference</b>:
+<span id='text_80'>tbl_xyzzy</span>
+<ul>
+<li>
+ForPath:
+False
+</li>
+</ul>
+<ol id='chd_80' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(81);'> +/- </span>
+<b id='type_81'>SchemaObjectName</b>:
+<span id='text_81'>tbl_xyzzy</span>
+<ul>
+<li>
+Count:
+1
+</li>
+</ul>
+<ol id='chd_81' class='hide canHide'>
+<li>
+<b id='type_82'>Identifier</b>:
+<span id='text_82'>tbl_xyzzy</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+tbl_xyzzy
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(83);'> +/- </span>
+<b id='type_83'>BeginEndBlockStatement</b>:
+<span id='text_83'>BEGIN</span>
+ <span onClick = 'toggleDetail(83);'>...</span>
+<div id='dtl_83' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_83' rows='3' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_83').value=texts[83];
+</script>
+</div>
+<ol id='chd_83' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(84);'> +/- </span>
+<b id='type_84'>StatementList</b>:
+<span id='text_84'></span>
+<ol id='chd_84' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(85);'> +/- </span>
+<b id='type_85'>SelectStatement</b>:
+<span id='text_85'>SELECT * FROM tbl_thud</span>
+<ol id='chd_85' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(86);'> +/- </span>
+<b id='type_86'>QuerySpecification</b>:
+<span id='text_86'>SELECT * FROM tbl_thud</span>
+<ul>
+<li>
+UniqueRowFilter:
+NotSpecified
+</li>
+</ul>
+<ol id='chd_86' class='hide canHide'>
+<li>
+<b id='type_87'>SelectStarExpression</b>:
+<span id='text_87'>*</span>
+</li>
+<li>
+<span onClick = 'toggleChildren(88);'> +/- </span>
+<b id='type_88'>FromClause</b>:
+<span id='text_88'>FROM tbl_thud</span>
+<ol id='chd_88' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(89);'> +/- </span>
+<b id='type_89'>NamedTableReference</b>:
+<span id='text_89'>tbl_thud</span>
+<ul>
+<li>
+ForPath:
+False
+</li>
+</ul>
+<ol id='chd_89' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(90);'> +/- </span>
+<b id='type_90'>SchemaObjectName</b>:
+<span id='text_90'>tbl_thud</span>
+<ul>
+<li>
+Count:
+1
+</li>
+</ul>
+<ol id='chd_90' class='hide canHide'>
+<li>
+<b id='type_91'>Identifier</b>:
+<span id='text_91'>tbl_thud</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+tbl_thud
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(92);'> +/- </span>
+<b id='type_92'>BeginEndBlockStatement</b>:
+<span id='text_92'>BEGIN</span>
+ <span onClick = 'toggleDetail(92);'>...</span>
+<div id='dtl_92' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_92' rows='3' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_92').value=texts[92];
+</script>
+</div>
+<ol id='chd_92' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(93);'> +/- </span>
+<b id='type_93'>StatementList</b>:
+<span id='text_93'></span>
+<ol id='chd_93' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(94);'> +/- </span>
+<b id='type_94'>SelectStatement</b>:
+<span id='text_94'>SELECT * FROM tbl_plugh</span>
+<ol id='chd_94' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(95);'> +/- </span>
+<b id='type_95'>QuerySpecification</b>:
+<span id='text_95'>SELECT * FROM tbl_plugh</span>
+<ul>
+<li>
+UniqueRowFilter:
+NotSpecified
+</li>
+</ul>
+<ol id='chd_95' class='hide canHide'>
+<li>
+<b id='type_96'>SelectStarExpression</b>:
+<span id='text_96'>*</span>
+</li>
+<li>
+<span onClick = 'toggleChildren(97);'> +/- </span>
+<b id='type_97'>FromClause</b>:
+<span id='text_97'>FROM tbl_plugh</span>
+<ol id='chd_97' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(98);'> +/- </span>
+<b id='type_98'>NamedTableReference</b>:
+<span id='text_98'>tbl_plugh</span>
+<ul>
+<li>
+ForPath:
+False
+</li>
+</ul>
+<ol id='chd_98' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(99);'> +/- </span>
+<b id='type_99'>SchemaObjectName</b>:
+<span id='text_99'>tbl_plugh</span>
+<ul>
+<li>
+Count:
+1
+</li>
+</ul>
+<ol id='chd_99' class='hide canHide'>
+<li>
+<b id='type_100'>Identifier</b>:
+<span id='text_100'>tbl_plugh</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+tbl_plugh
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(101);'> +/- </span>
+<b id='type_101'>BeginEndBlockStatement</b>:
+<span id='text_101'>BEGIN</span>
+ <span onClick = 'toggleDetail(101);'>...</span>
+<div id='dtl_101' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_101' rows='3' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_101').value=texts[101];
+</script>
+</div>
+<ol id='chd_101' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(102);'> +/- </span>
+<b id='type_102'>StatementList</b>:
+<span id='text_102'></span>
+<ol id='chd_102' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(103);'> +/- </span>
+<b id='type_103'>SelectStatement</b>:
+<span id='text_103'>SELECT * FROM tbl_waldo</span>
+<ol id='chd_103' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(104);'> +/- </span>
+<b id='type_104'>QuerySpecification</b>:
+<span id='text_104'>SELECT * FROM tbl_waldo</span>
+<ul>
+<li>
+UniqueRowFilter:
+NotSpecified
+</li>
+</ul>
+<ol id='chd_104' class='hide canHide'>
+<li>
+<b id='type_105'>SelectStarExpression</b>:
+<span id='text_105'>*</span>
+</li>
+<li>
+<span onClick = 'toggleChildren(106);'> +/- </span>
+<b id='type_106'>FromClause</b>:
+<span id='text_106'>FROM tbl_waldo</span>
+<ol id='chd_106' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(107);'> +/- </span>
+<b id='type_107'>NamedTableReference</b>:
+<span id='text_107'>tbl_waldo</span>
+<ul>
+<li>
+ForPath:
+False
+</li>
+</ul>
+<ol id='chd_107' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(108);'> +/- </span>
+<b id='type_108'>SchemaObjectName</b>:
+<span id='text_108'>tbl_waldo</span>
+<ul>
+<li>
+Count:
+1
+</li>
+</ul>
+<ol id='chd_108' class='hide canHide'>
+<li>
+<b id='type_109'>Identifier</b>:
+<span id='text_109'>tbl_waldo</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+tbl_waldo
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(110);'> +/- </span>
+<b id='type_110'>BeginEndBlockStatement</b>:
+<span id='text_110'>BEGIN</span>
+ <span onClick = 'toggleDetail(110);'>...</span>
+<div id='dtl_110' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_110' rows='3' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_110').value=texts[110];
+</script>
+</div>
+<ol id='chd_110' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(111);'> +/- </span>
+<b id='type_111'>StatementList</b>:
+<span id='text_111'></span>
+<ol id='chd_111' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(112);'> +/- </span>
+<b id='type_112'>SelectStatement</b>:
+<span id='text_112'>SELECT * FROM tbl_quux</span>
+<ol id='chd_112' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(113);'> +/- </span>
+<b id='type_113'>QuerySpecification</b>:
+<span id='text_113'>SELECT * FROM tbl_quux</span>
+<ul>
+<li>
+UniqueRowFilter:
+NotSpecified
+</li>
+</ul>
+<ol id='chd_113' class='hide canHide'>
+<li>
+<b id='type_114'>SelectStarExpression</b>:
+<span id='text_114'>*</span>
+</li>
+<li>
+<span onClick = 'toggleChildren(115);'> +/- </span>
+<b id='type_115'>FromClause</b>:
+<span id='text_115'>FROM tbl_quux</span>
+<ol id='chd_115' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(116);'> +/- </span>
+<b id='type_116'>NamedTableReference</b>:
+<span id='text_116'>tbl_quux</span>
+<ul>
+<li>
+ForPath:
+False
+</li>
+</ul>
+<ol id='chd_116' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(117);'> +/- </span>
+<b id='type_117'>SchemaObjectName</b>:
+<span id='text_117'>tbl_quux</span>
+<ul>
+<li>
+Count:
+1
+</li>
+</ul>
+<ol id='chd_117' class='hide canHide'>
+<li>
+<b id='type_118'>Identifier</b>:
+<span id='text_118'>tbl_quux</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+tbl_quux
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(119);'> +/- </span>
+<b id='type_119'>BeginEndBlockStatement</b>:
+<span id='text_119'>BEGIN</span>
+ <span onClick = 'toggleDetail(119);'>...</span>
+<div id='dtl_119' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_119' rows='5' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_119').value=texts[119];
+</script>
+</div>
+<ol id='chd_119' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(120);'> +/- </span>
+<b id='type_120'>StatementList</b>:
+<span id='text_120'></span>
+<ol id='chd_120' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(121);'> +/- </span>
+<b id='type_121'>SelectStatement</b>:
+<span id='text_121'>SELECT * FROM tbl_baz</span>
+<ol id='chd_121' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(122);'> +/- </span>
+<b id='type_122'>QuerySpecification</b>:
+<span id='text_122'>SELECT * FROM tbl_baz</span>
+<ul>
+<li>
+UniqueRowFilter:
+NotSpecified
+</li>
+</ul>
+<ol id='chd_122' class='hide canHide'>
+<li>
+<b id='type_123'>SelectStarExpression</b>:
+<span id='text_123'>*</span>
+</li>
+<li>
+<span onClick = 'toggleChildren(124);'> +/- </span>
+<b id='type_124'>FromClause</b>:
+<span id='text_124'>FROM tbl_baz</span>
+<ol id='chd_124' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(125);'> +/- </span>
+<b id='type_125'>NamedTableReference</b>:
+<span id='text_125'>tbl_baz</span>
+<ul>
+<li>
+ForPath:
+False
+</li>
+</ul>
+<ol id='chd_125' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(126);'> +/- </span>
+<b id='type_126'>SchemaObjectName</b>:
+<span id='text_126'>tbl_baz</span>
+<ul>
+<li>
+Count:
+1
+</li>
+</ul>
+<ol id='chd_126' class='hide canHide'>
+<li>
+<b id='type_127'>Identifier</b>:
+<span id='text_127'>tbl_baz</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+tbl_baz
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(128);'> +/- </span>
+<b id='type_128'>IfStatement</b>:
+<span id='text_128'>IF @x = 3</span>
+ <span onClick = 'toggleDetail(128);'>...</span>
+<div id='dtl_128' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_128' rows='5' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_128').value=texts[128];
+</script>
+</div>
+<ol id='chd_128' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(129);'> +/- </span>
+<b id='type_129'>BooleanComparisonExpression</b>:
+<span id='text_129'>@x = 3</span>
+<ul>
+<li>
+ComparisonType:
+Equals
+</li>
+</ul>
+<ol id='chd_129' class='hide canHide'>
+<li>
+<b id='type_130'>VariableReference</b>:
+<span id='text_130'>@x</span>
+<ul>
+<li>
+Name:
+@x
+</li>
+</ul>
+</li>
+<li>
+<b id='type_131'>IntegerLiteral</b>:
+<span id='text_131'>3</span>
+<ul>
+<li>
+LiteralType:
+Integer
+</li>
+<li>
+Value:
+3
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(132);'> +/- </span>
+<b id='type_132'>BeginEndBlockStatement</b>:
+<span id='text_132'>BEGIN</span>
+ <span onClick = 'toggleDetail(132);'>...</span>
+<div id='dtl_132' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_132' rows='3' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_132').value=texts[132];
+</script>
+</div>
+<ol id='chd_132' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(133);'> +/- </span>
+<b id='type_133'>StatementList</b>:
+<span id='text_133'></span>
+<ol id='chd_133' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(134);'> +/- </span>
+<b id='type_134'>SelectStatement</b>:
+<span id='text_134'>SELECT * FROM tbl_corge</span>
+<ol id='chd_134' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(135);'> +/- </span>
+<b id='type_135'>QuerySpecification</b>:
+<span id='text_135'>SELECT * FROM tbl_corge</span>
+<ul>
+<li>
+UniqueRowFilter:
+NotSpecified
+</li>
+</ul>
+<ol id='chd_135' class='hide canHide'>
+<li>
+<b id='type_136'>SelectStarExpression</b>:
+<span id='text_136'>*</span>
+</li>
+<li>
+<span onClick = 'toggleChildren(137);'> +/- </span>
+<b id='type_137'>FromClause</b>:
+<span id='text_137'>FROM tbl_corge</span>
+<ol id='chd_137' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(138);'> +/- </span>
+<b id='type_138'>NamedTableReference</b>:
+<span id='text_138'>tbl_corge</span>
+<ul>
+<li>
+ForPath:
+False
+</li>
+</ul>
+<ol id='chd_138' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(139);'> +/- </span>
+<b id='type_139'>SchemaObjectName</b>:
+<span id='text_139'>tbl_corge</span>
+<ul>
+<li>
+Count:
+1
+</li>
+</ul>
+<ol id='chd_139' class='hide canHide'>
+<li>
+<b id='type_140'>Identifier</b>:
+<span id='text_140'>tbl_corge</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+tbl_corge
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(141);'> +/- </span>
+<b id='type_141'>BeginEndBlockStatement</b>:
+<span id='text_141'>BEGIN</span>
+ <span onClick = 'toggleDetail(141);'>...</span>
+<div id='dtl_141' class='detailText hide canHide'>
+<textarea class='detailText' id='txt_141' rows='3' readonly></textarea>
+<script type='text/javascript'>
+document.getElementById('txt_141').value=texts[141];
+</script>
+</div>
+<ol id='chd_141' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(142);'> +/- </span>
+<b id='type_142'>StatementList</b>:
+<span id='text_142'></span>
+<ol id='chd_142' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(143);'> +/- </span>
+<b id='type_143'>SelectStatement</b>:
+<span id='text_143'>SELECT * FROM tbl_grault</span>
+<ol id='chd_143' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(144);'> +/- </span>
+<b id='type_144'>QuerySpecification</b>:
+<span id='text_144'>SELECT * FROM tbl_grault</span>
+<ul>
+<li>
+UniqueRowFilter:
+NotSpecified
+</li>
+</ul>
+<ol id='chd_144' class='hide canHide'>
+<li>
+<b id='type_145'>SelectStarExpression</b>:
+<span id='text_145'>*</span>
+</li>
+<li>
+<span onClick = 'toggleChildren(146);'> +/- </span>
+<b id='type_146'>FromClause</b>:
+<span id='text_146'>FROM tbl_grault</span>
+<ol id='chd_146' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(147);'> +/- </span>
+<b id='type_147'>NamedTableReference</b>:
+<span id='text_147'>tbl_grault</span>
+<ul>
+<li>
+ForPath:
+False
+</li>
+</ul>
+<ol id='chd_147' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(148);'> +/- </span>
+<b id='type_148'>SchemaObjectName</b>:
+<span id='text_148'>tbl_grault</span>
+<ul>
+<li>
+Count:
+1
+</li>
+</ul>
+<ol id='chd_148' class='hide canHide'>
+<li>
+<b id='type_149'>Identifier</b>:
+<span id='text_149'>tbl_grault</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+tbl_grault
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(150);'> +/- </span>
+<b id='type_150'>ExecuteStatement</b>:
+<span id='text_150'>EXECUTE sp_executesql N&#39;SELECT * FROM tbl_foo WHERE id = @id&#39;, N&#39;@id INT&#39;, @id = 1</span>
+<ol id='chd_150' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(151);'> +/- </span>
+<b id='type_151'>ExecuteSpecification</b>:
+<span id='text_151'>EXECUTE sp_executesql N&#39;SELECT * FROM tbl_foo WHERE id = @id&#39;, N&#39;@id INT&#39;, @id = 1</span>
+<ol id='chd_151' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(152);'> +/- </span>
+<b id='type_152'>ExecutableProcedureReference</b>:
+<span id='text_152'>sp_executesql N&#39;SELECT * FROM tbl_foo WHERE id = @id&#39;, N&#39;@id INT&#39;, @id = 1</span>
+<ol id='chd_152' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(153);'> +/- </span>
+<b id='type_153'>ExecuteParameter</b>:
+<span id='text_153'>N&#39;SELECT * FROM tbl_foo WHERE id = @id&#39;</span>
+<ul>
+<li>
+IsOutput:
+False
+</li>
+</ul>
+<ol id='chd_153' class='hide canHide'>
+<li>
+<b id='type_154'>StringLiteral</b>:
+<span id='text_154'>N&#39;SELECT * FROM tbl_foo WHERE id = @id&#39;</span>
+<ul>
+<li>
+IsLargeObject:
+False
+</li>
+<li>
+IsNational:
+True
+</li>
+<li>
+LiteralType:
+String
+</li>
+<li>
+Value:
+SELECT * FROM tbl_foo WHERE id = @id
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(155);'> +/- </span>
+<b id='type_155'>ExecuteParameter</b>:
+<span id='text_155'>N&#39;@id INT&#39;</span>
+<ul>
+<li>
+IsOutput:
+False
+</li>
+</ul>
+<ol id='chd_155' class='hide canHide'>
+<li>
+<b id='type_156'>StringLiteral</b>:
+<span id='text_156'>N&#39;@id INT&#39;</span>
+<ul>
+<li>
+IsLargeObject:
+False
+</li>
+<li>
+IsNational:
+True
+</li>
+<li>
+LiteralType:
+String
+</li>
+<li>
+Value:
+@id INT
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(157);'> +/- </span>
+<b id='type_157'>ExecuteParameter</b>:
+<span id='text_157'>@id = 1</span>
+<ul>
+<li>
+IsOutput:
+False
+</li>
+</ul>
+<ol id='chd_157' class='hide canHide'>
+<li>
+<b id='type_158'>VariableReference</b>:
+<span id='text_158'>@id</span>
+<ul>
+<li>
+Name:
+@id
+</li>
+</ul>
+</li>
+<li>
+<b id='type_159'>IntegerLiteral</b>:
+<span id='text_159'>1</span>
+<ul>
+<li>
+LiteralType:
+Integer
+</li>
+<li>
+Value:
+1
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<span onClick = 'toggleChildren(160);'> +/- </span>
+<b id='type_160'>ProcedureReferenceName</b>:
+<span id='text_160'>sp_executesql</span>
+<ol id='chd_160' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(161);'> +/- </span>
+<b id='type_161'>ProcedureReference</b>:
+<span id='text_161'>sp_executesql</span>
+<ol id='chd_161' class='hide canHide'>
+<li>
+<span onClick = 'toggleChildren(162);'> +/- </span>
+<b id='type_162'>SchemaObjectName</b>:
+<span id='text_162'>sp_executesql</span>
+<ul>
+<li>
+Count:
+1
+</li>
+</ul>
+<ol id='chd_162' class='hide canHide'>
+<li>
+<b id='type_163'>Identifier</b>:
+<span id='text_163'>sp_executesql</span>
+<ul>
+<li>
+QuoteType:
+NotQuoted
+</li>
+<li>
+Value:
+sp_executesql
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+</BODY>
+</html>

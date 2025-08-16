@@ -1,0 +1,32 @@
+{
+  "TypeName": "TSqlScript",
+  "Text": "PRINT 0",
+  "Children": [
+    {
+      "TypeName": "TSqlBatch",
+      "Text": "PRINT 0",
+      "Children": [
+        {
+          "TypeName": "PrintStatement",
+          "Text": "PRINT 0",
+          "Children": [
+            {
+              "TypeName": "IntegerLiteral",
+              "Text": "0",
+              "Properties": [
+                {
+                  "Name": "LiteralType",
+                  "Value": "Integer"
+                },
+                {
+                  "Name": "Value",
+                  "Value": "0"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

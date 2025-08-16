@@ -46,7 +46,7 @@ namespace SqlParseTree
     class Program
     {
         static void Main(string[] args)
-            => new Parser()
+            => new Parser((s) => { s.CaseInsensitiveEnumValues = true; } )
                 .ParseArguments<Options>(args)
                 .WithParsed(Run)
                 .WithNotParsed(HandleParseError);
