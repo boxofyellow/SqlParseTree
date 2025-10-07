@@ -1,4 +1,6 @@
 name: Test SqlParseTree
+permissions:
+  contents: read
 
 on:
   push:
