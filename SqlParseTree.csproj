@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BoxOfYellow.ConsoleMarkdownRenderer" Version="0.7.10" />
+    <PackageReference Include="BoxOfYellow.ConsoleMarkdownRenderer" Version="0.7.11" />
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="Moq" Version="4.20.72" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageReference Include="YamlDotNet" Version="16.3.0" />
+    <PackageReference Include="YamlDotNet" Version="17.0.0" />
 
     <PackageReference Include="Microsoft.SqlServer.DACFx" Version="170.3.93" />
   </ItemGroup>
