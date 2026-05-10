@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using CommandLine;
-using ConsoleMarkdownRenderer;
+using BoxOfYellow.ConsoleMarkdownRenderer;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using Newtonsoft.Json;
 using YamlDotNet.Serialization;
