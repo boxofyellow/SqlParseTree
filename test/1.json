@@ -28,5 +28,11 @@
         }
       ]
     }
+  ],
+  "Properties": [
+    {
+      "Name": "TrailingGoCount",
+      "Value": "0"
+    }
   ]
 }

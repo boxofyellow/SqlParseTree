@@ -13,7 +13,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="YamlDotNet" Version="18.1.0" />
 
-    <PackageReference Include="Microsoft.SqlServer.DACFx" Version="170.4.83" />
+    <PackageReference Include="Microsoft.SqlServer.DACFx" Version="170.5.96" />
   </ItemGroup>
 
   <ItemGroup>
