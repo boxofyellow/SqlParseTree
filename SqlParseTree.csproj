@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BoxOfYellow.ConsoleMarkdownRenderer" Version="0.12.5" />
+    <PackageReference Include="BoxOfYellow.ConsoleMarkdownRenderer" Version="0.12.6" />
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="Moq" Version="4.21.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
